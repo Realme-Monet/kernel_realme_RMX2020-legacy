@@ -57,10 +57,6 @@ source "drivers/soc/oplus/system/oplus_mm_fb/Kconfig"
 source "drivers/soc/oplus/system/qcom_watchdog/Kconfig"
 #endif /* OPLUS_FEATURE_QCOM_WATCHDOG */
 
-#ifdef OPLUS_FEATURE_THEIA
-#yanggang@BSP.Kernel.Stability,2020/07/08, Add for theia
-source "drivers/soc/oplus/system/theia/Kconfig"
-#endif /* OPLUS_FEATURE_THEIA */
 #ifdef OPLUS_FEATURE_MISC
 #terry.zhong@OPTI.Kernel.Stability, 2020/09/7, enable oplus misc feature
 source "drivers/soc/oplus/system/misc/Kconfig"

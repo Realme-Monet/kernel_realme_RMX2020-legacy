@@ -38,10 +38,6 @@ obj-$(CONFIG_OPLUS_FEATURE_MM_FEEDBACK)         += oplus_mm_fb/
 obj-$(CONFIG_OPLUS_FEATURE_QCOM_WATCHDOG)     += qcom_watchdog/
 #endif /* OPLUS_FEATURE_QCOM_WATCHDOG */
 
-#ifdef OPLUS_FEATURE_THEIA
-#yanggang@BSP.Kernel.Stability,2020/07/08, Add for theia
-obj-$(CONFIG_OPLUS_FEATURE_THEIA)     += theia/
-#endif /* OPLUS_FEATURE_THEIA */
 #ifdef OPLUS_FEATURE_MISC
 #terry.zhong@OPTI.Kernel.Stability, 2020/09/7, enable oplus misc feature
 obj-y += misc/
