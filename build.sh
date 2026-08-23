@@ -6,9 +6,10 @@ rm -rf AnyKernel
 source ~/.bashrc && source ~/.profile
 export LC_ALL=C && export USE_CCACHE=1
 export ARCH=arm64
-export KBUILD_BUILD_HOST=neolit
-export KBUILD_BUILD_USER="sarthakroy2002"
-wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/tags/android-14.0.0_r2/clang-r487747c.tar.gz -O "aosp-clang.tar.gz"
+export KBUILD_BUILD_HOST=Linux
+export KBUILD_BUILD_USER="dp02xd"
+# wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/tags/android-14.0.0_r2/clang-r487747c.tar.gz -O "aosp-clang.tar.gz"
+wget https://github.com/yhnu/op7t/releases/download/v1.0/clang-r487747c.tar.gz -O "aosp-clang.tar.gz"
 mkdir clang && tar -xf aosp-clang.tar.gz -C clang && rm -rf aosp-clang.tar.gz
 
 [ -d "out" ] && rm -rf out || mkdir -p out
@@ -25,7 +26,7 @@ make -j$(nproc --all) O=out \
 
 function zipping()
 {
-git clone --depth=1 https://github.com/sarthakroy2002/AnyKernel3.git AnyKernel
+git clone --depth=1 https://github.com/monet-trees/AnyKernel3.git AnyKernel
 cp out/arch/arm64/boot/Image.gz-dtb AnyKernel
 cd AnyKernel
 zip -r9 Test-OSS-KERNEL-RMX2020-NEOLIT.zip *
