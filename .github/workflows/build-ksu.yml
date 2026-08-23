@@ -1,0 +1,47 @@
+name: Build Kernel with sKernelSU
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Build Environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential bc libncurses5-dev libssl-dev \
+            bison flex libelf-dev libsqlite3-dev ccache zip unzip curl wget git
+
+      - name: Fetch Latest sKernelSU Version and Tag
+        run: |
+          TAG_URL=$(curl -sL -o /dev/null -w "%{url_effective}" https://github.com/doubledashdot/sKernelSU/releases/latest)
+          KSU_VER=$(echo "$TAG_URL" | awk -F'/' '{print $NF}')
+          DATE_STR=$(date +'%d%m%y')
+          
+          ZIP_NAME="NoName-sKernelSU-${KSU_VER}-${DATE_STR}.zip"
+          echo "ZIP_NAME=${ZIP_NAME}" >> $GITHUB_ENV
+
+      - name: Setup sKernelSU
+        run: |
+          curl -LSs "https://raw.githubusercontent.com/doubledashdot/sKernelSU/refs/heads/master/kernel/setup.sh" | bash -
+
+      - name: Execute build.sh
+        run: |
+          chmod +x build.sh
+          ./build.sh
+
+      - name: Rename Zip Output
+        run: |
+          mv AnyKernel/Test-OSS-KERNEL-RMX2020-NEOLIT.zip "${ZIP_NAME}"
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ZIP_NAME }}
+          path: ${{ env.ZIP_NAME }}
+          compression-level: 0
