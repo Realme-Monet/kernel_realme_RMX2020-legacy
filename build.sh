@@ -30,7 +30,7 @@ make -j$(nproc --all) O=out \
 function zipping()
 {
 rm -rf AnyKernel
-git clone --depth=1 https://github.com/monet-trees/AnyKernel3.git AnyKernel
+git clone --depth=1 https://github.com/realme-monet/AnyKernel3.git AnyKernel
 cp out/arch/arm64/boot/Image.gz-dtb AnyKernel
 cd AnyKernel
 ZIPNAME="AETHER.XXKSU.MONET.$(date '+%d%m%Y%H%M').zip"
